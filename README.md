@@ -133,3 +133,13 @@ $ dotnet ef database update
 ```
 
 > Done.
+
+Item から SubItem を辿れるようにする
+
+```ps
+$ dotnet add package AutoMapper
+$ dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection
+```
+
+- `+ DTO/ItemSubItem.cs`
+- `+ DTO/MyProfile.cs`

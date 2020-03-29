@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using DotNetCore_RestApi_Sqlite.DTO;
+using AutoMapper;
 
 namespace DotNetCore_RestApi_Sqlite
 {
@@ -29,6 +31,8 @@ namespace DotNetCore_RestApi_Sqlite
             services.AddControllers();
             services.AddDbContext<MyContext>(options => options.UseSqlite(
                 Configuration.GetConnectionString("MyContext")));
+
+            services.AddAutoMapper(typeof(MyProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
