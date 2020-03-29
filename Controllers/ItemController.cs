@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
-using AutoMapper;
-using DotNetCore_RestApi_Sqlite.DTO;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using DotNetCore_RestApi_Sqlite.DTO;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace DotNetCore_RestApi_Sqlite.Controllers
 {
