@@ -104,3 +104,32 @@ $ dotnet run
 ```
 
 [https://localhost:5001/WeatherForecast/](https://localhost:5001/WeatherForecast/) にアクセスし、JSON データが返ることを確認する
+
+モデルとコントローラーを修正する
+
+- `- WeatherForecast.cs`
+- `+ Models/Item.cs`
+- `+ Models/SubItem.cs`
+
+- `- Controllers\WeatherForecastController.cs`
+- `+ Controllers\ItemController.cs`
+
+- `+ Models/MyContext.cs`
+- `+ appsettings.json`
+- `+ Startup.cs`
+
+マイグレーションファイルを作成する
+
+```ps
+$ dotnet ef migrations add Initial
+```
+
+> Done. To undo this action, use 'ef migrations remove'
+
+DB に反映させる
+
+```ps
+$ dotnet ef database update
+```
+
+> Done.
