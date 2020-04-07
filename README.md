@@ -160,3 +160,5 @@ dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 dotnet tool install --global dotnet-aspnet-codegenerator
 dotnet aspnet-codegenerator controller -name SubItemController -async -api -m SubItem -dc MyContext -outDir Controllers
 ```
+
+フロントエンドを追加する

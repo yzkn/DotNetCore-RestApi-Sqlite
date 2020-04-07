@@ -36,6 +36,11 @@ namespace DotNetCore_RestApi_Sqlite
                 app.UseDeveloperExceptionPage();
             }
 
+            // Static files support
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            //
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
