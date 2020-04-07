@@ -143,3 +143,20 @@ $ dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection
 
 - `+ DTO/ItemSubItem.cs`
 - `+ DTO/MyProfile.cs`
+
+ItemController を修正する
+
+```cs
+    // [Route("[controller]")]
+    [Route("api/[controller]")]
+```
+
+SubItemController を追加する
+
+```ps
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet tool install --global dotnet-aspnet-codegenerator
+dotnet aspnet-codegenerator controller -name SubItemController -async -api -m SubItem -dc MyContext -outDir Controllers
+```
