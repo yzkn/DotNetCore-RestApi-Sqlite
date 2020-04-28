@@ -194,3 +194,7 @@ $ dotnet run
 * GETで `Authorization: Bearer <取得したトークン>` ヘッダとともに [/api/item](http://localhost:5000/api/item) にアクセスし、Item一覧が返ることを確認
 
 ![データ取得](md-src/rested002.png "データ取得")
+
+## フロントエンドをJWT認証に対応させる
+
+* wwwroot/*

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -9,6 +9,9 @@
 
 <body>
     <h1>Item CRUD</h1>
+    <h3>Token</h3>
+    <button onclick="getToken()">Reacquire token</button>
+
     <h3>Add</h3>
     <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
         <input type="text" id="add-title" placeholder="Title">
@@ -41,6 +44,8 @@
 
     <script src="js/item.js" asp-append-version="true"></script>
     <script type="text/javascript">
+        closeInput();
+        getToken();
         getItems();
     </script>
 </body>
