@@ -17,9 +17,12 @@ namespace DotNetCore_RestApi_Sqlite.Controllers
     public class TokenController : ControllerBase
     {
         private IConfiguration _config;
-        public TokenController(IConfiguration config)
+        private readonly MyContext _context;
+
+        public TokenController(IConfiguration config, MyContext myContext)
         {
             _config = config;
+            _context = myContext;
         }
 
         [AllowAnonymous]
@@ -53,7 +56,21 @@ namespace DotNetCore_RestApi_Sqlite.Controllers
         {
             UserModel user = null;
 
-            if (login.Username == "a" && login.Password == "secret")
+
+            var item = _context
+                .Items
+                .AsEnumerable()
+                .Where(b => b.Title == login.Username)
+                .Where(b => b.Content == login.Password)
+                ;
+
+            // DBアクセスの例
+            if (item.Count() == 1)
+            {
+                user = new UserModel { Name = item.First().Title, Email = item.First().Content };
+            }
+
+            if ((login.Username == "a" && login.Password == "secret"))
             {
                 user = new UserModel { Name = "AAA", Email = "a@example.net" };
             }
