@@ -10,7 +10,7 @@ function getToken() {
     fetch('api/token', {
         method: "POST",
         headers: {
-            Accept: "application/json",
+            "Accept": "application/json",
             "Content-Type": "application/json",
         },
         body: JSON.stringify(user),
@@ -26,7 +26,7 @@ function getItems() {
     fetch(uri, {
         method: "GET",
         headers: {
-            Authorization: "Bearer " + localStorage.getItem('api_jwt_token'),
+            "Authorization": "Bearer " + localStorage.getItem('api_jwt_token'),
         }
     })
         .then((response) => response.json())
@@ -39,20 +39,19 @@ function addItem() {
     const addTitleTextbox = document.getElementById("add-title");
 
     const item = {
-        title: addTitleTextbox.value.trim(),
         content: addContentTextbox.value.trim(),
+        title: addTitleTextbox.value.trim(),
     };
 
     fetch(uri, {
         method: "POST",
         headers: {
-            Accept: "application/json",
+            "Accept": "application/json",
             "Content-Type": "application/json",
-            Authorization: "Bearer " + localStorage.getItem('api_jwt_token')
+            "Authorization": "Bearer " + localStorage.getItem('api_jwt_token')
         },
         body: JSON.stringify(item),
     })
-        //.then((response) => response.json())
         .then(() => {
             getItems();
             addTitleTextbox.value = "";
@@ -65,7 +64,7 @@ function deleteItem(id) {
     fetch(`${uri}/${id}`, {
         method: "DELETE",
         headers: {
-            Authorization: "Bearer " + localStorage.getItem('api_jwt_token')
+            "Authorization": "Bearer " + localStorage.getItem('api_jwt_token')
         }
     })
         .then(() => getItems())
@@ -76,39 +75,40 @@ function displayEditForm(id) {
     const item = items.find((item) => item.id === id);
 
     document.getElementById("edit-content").value = item.content;
+    document.getElementById("edit-form").style.display = "block";
     document.getElementById("edit-id").value = item.id;
     document.getElementById("edit-title").value = item.title;
-    document.getElementById("editForm").style.display = "block";
 }
 
 function updateItem() {
     const itemId = document.getElementById("edit-id").value;
 
     const item = {
+        content: document.getElementById("edit-content").value.trim(),
         id: parseInt(itemId, 10),
         title: document.getElementById("edit-title").value.trim(),
-        content: document.getElementById("edit-content").value.trim(),
     };
 
     fetch(`${uri}/${itemId}`, {
         method: "PUT",
         headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + localStorage.getItem('api_jwt_token')
+            "Accept": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem('api_jwt_token'),
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(item),
     })
-        .then(() => getItems())
+        .then(() => {
+            getItems();
+            closeInput();
+        })
         .catch((error) => console.error("Unable to update item.", error));
-
-    closeInput();
 
     return false;
 }
 
 function closeInput() {
-    document.getElementById("editForm").style.display = "none";
+    document.getElementById("edit-form").style.display = "none";
 }
 
 function _displayCount(itemCount) {

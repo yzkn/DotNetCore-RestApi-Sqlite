@@ -1,17 +1,11 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using DotNetCore_RestApi_Sqlite;
 using DotNetCore_RestApi_Sqlite.DTO;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-using Microsoft.AspNetCore.Authorization;
 
 namespace DotNetCore_RestApi_Sqlite.Controllers
 {
@@ -22,12 +16,10 @@ namespace DotNetCore_RestApi_Sqlite.Controllers
     {
         private readonly IMapper _mapper;
         private readonly MyContext _context;
-        private readonly ILogger<ItemController> _logger;
 
-        public ItemController(MyContext myContext, ILogger<ItemController> logger, IMapper mapper)
+        public ItemController(MyContext myContext, IMapper mapper)
         {
             _context = myContext;
-            _logger = logger;
             _mapper = mapper;
         }
 
@@ -114,7 +106,7 @@ namespace DotNetCore_RestApi_Sqlite.Controllers
             _context.Items.Remove(item);
             await _context.SaveChangesAsync();
 
-            return item;
+            return NoContent();
         }
 
         private bool ItemExists(int id)

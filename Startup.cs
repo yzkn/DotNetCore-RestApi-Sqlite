@@ -1,15 +1,14 @@
 using AutoMapper;
 using DotNetCore_RestApi_Sqlite.DTO;
+using Microsoft.AspNetCore.Authentication.JwtBearer; // Nuget: Microsoft.AspNetCore.Authentication.JwtBearer
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer; // Nuget: Microsoft.AspNetCore.Authentication.JwtBearer
 using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace DotNetCore_RestApi_Sqlite
 {

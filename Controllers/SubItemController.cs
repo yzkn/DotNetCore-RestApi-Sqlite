@@ -1,13 +1,9 @@
-using DotNetCore_RestApi_Sqlite;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-using Microsoft.AspNetCore.Authorization;
 
 namespace DotNetCore_RestApi_Sqlite.Controllers
 {
@@ -101,7 +97,7 @@ namespace DotNetCore_RestApi_Sqlite.Controllers
             _context.SubItems.Remove(subItem);
             await _context.SaveChangesAsync();
 
-            return subItem;
+            return NoContent();
         }
 
         private bool SubItemExists(int id)
