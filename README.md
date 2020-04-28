@@ -73,6 +73,8 @@ Examples:
     dotnet new --help
 ```
 
+## APIプロジェクトを作成する
+
 ```ps
 $ dotnet new webapi
 ```
@@ -99,13 +101,17 @@ $ dotnet add package Microsoft.EntityFrameworkCore.Sqlite
 
 `Properties\launchSettings.json` から `https://localhost:5001;`を削除する
 
+### 動作確認する
+
 ```ps
 $ dotnet run
 ```
 
 [https://localhost:5001/WeatherForecast/](https://localhost:5001/WeatherForecast/) にアクセスし、JSON データが返ることを確認する
 
-モデルとコントローラーを修正する
+## WeatherForecastを削除し独自モデルを追加する
+
+### モデルとコントローラーを修正する
 
 - `- WeatherForecast.cs`
 - `+ Models/Item.cs`
@@ -118,7 +124,7 @@ $ dotnet run
 - `+ appsettings.json`
 - `+ Startup.cs`
 
-マイグレーションファイルを作成する
+### マイグレーションファイルを作成する
 
 ```ps
 $ dotnet ef migrations add Initial
@@ -126,7 +132,7 @@ $ dotnet ef migrations add Initial
 
 > Done. To undo this action, use 'ef migrations remove'
 
-DB に反映させる
+### DB に反映させる
 
 ```ps
 $ dotnet ef database update
@@ -134,7 +140,7 @@ $ dotnet ef database update
 
 > Done.
 
-Item から SubItem を辿れるようにする
+### Item から SubItem を辿れるようにする
 
 ```ps
 $ dotnet add package AutoMapper
@@ -144,21 +150,47 @@ $ dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection
 - `+ DTO/ItemSubItem.cs`
 - `+ DTO/MyProfile.cs`
 
-ItemController を修正する
+### ItemController を修正する
 
 ```cs
     // [Route("[controller]")]
     [Route("api/[controller]")]
 ```
 
-SubItemController を追加する
+### SubItemController を追加する
 
 ```ps
-dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
-dotnet add package Microsoft.EntityFrameworkCore.Design
-dotnet add package Microsoft.EntityFrameworkCore.SqlServer
-dotnet tool install --global dotnet-aspnet-codegenerator
-dotnet aspnet-codegenerator controller -name SubItemController -async -api -m SubItem -dc MyContext -outDir Controllers
+$ dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+$ dotnet add package Microsoft.EntityFrameworkCore.Design
+$ dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+$ dotnet tool install --global dotnet-aspnet-codegenerator
+$ dotnet aspnet-codegenerator controller -name SubItemController -async -api -m SubItem -dc MyContext -outDir Controllers
 ```
 
-フロントエンドを追加する
+## フロントエンドを追加する
+
+* wwwroot/*
+
+## JWT認証を追加する
+
+認証に利用する情報を `Controller/TokenController.cs` の `Authenticate()` に記載しているが、本来はDB等から取得する
+
+* `Startup.cs`
+* `appsettings.json`
+* `Controller/ItemController.cs`
+* `Controller/SubItemController.cs`
+* `+ Controller/TokenController.cs`
+
+### 動作確認する
+
+```ps
+$ dotnet run
+```
+
+* POSTで [/api/token](http://localhost:5000/api/token) に `{"username": "a", "password": "secret"}` を送信し、トークンが返ることを確認
+
+![トークン取得](md-src/rested001.png "トークン取得")
+
+* GETで `Authorization: Bearer <取得したトークン>` ヘッダとともに [/api/item](http://localhost:5000/api/item) にアクセスし、Item一覧が返ることを確認
+
+![データ取得](md-src/rested002.png "データ取得")
