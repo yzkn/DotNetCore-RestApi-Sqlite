@@ -73,7 +73,7 @@ Examples:
     dotnet new --help
 ```
 
-## APIプロジェクトを作成する
+## API プロジェクトを作成する
 
 ```ps
 $ dotnet new webapi
@@ -107,9 +107,9 @@ $ dotnet add package Microsoft.EntityFrameworkCore.Sqlite
 $ dotnet run
 ```
 
-[https://localhost:5001/WeatherForecast/](https://localhost:5001/WeatherForecast/) にアクセスし、JSON データが返ることを確認する
+[http://localhost:5000/WeatherForecast/](http://localhost:5000/WeatherForecast/) にアクセスし、JSON データが返ることを確認する
 
-## WeatherForecastを削除し独自モデルを追加する
+## WeatherForecast を削除し独自モデルを追加する
 
 ### モデルとコントローラーを修正する
 
@@ -169,17 +169,17 @@ $ dotnet aspnet-codegenerator controller -name SubItemController -async -api -m 
 
 ## フロントエンドを追加する
 
-* wwwroot/*
+- wwwroot/\*
 
-## JWT認証を追加する
+## JWT 認証を追加する
 
-認証に利用する情報を `Controller/TokenController.cs` の `Authenticate()` に記載しているが、本来はDB等から取得する
+認証に利用する情報を `Controller/TokenController.cs` の `Authenticate()` に記載しているが、本来は DB 等から取得する
 
-* `Startup.cs`
-* `appsettings.json`
-* `Controller/ItemController.cs`
-* `Controller/SubItemController.cs`
-* `+ Controller/TokenController.cs`
+- `Startup.cs`
+- `appsettings.json`
+- `Controller/ItemController.cs`
+- `Controller/SubItemController.cs`
+- `+ Controller/TokenController.cs`
 
 ### 動作確認する
 
@@ -187,14 +187,14 @@ $ dotnet aspnet-codegenerator controller -name SubItemController -async -api -m 
 $ dotnet run
 ```
 
-* POSTで [/api/token](http://localhost:5000/api/token) に `{"username": "a", "password": "secret"}` を送信し、トークンが返ることを確認
+- POST で [/api/token](http://localhost:5000/api/token) に `{"username": "a", "password": "secret"}` を送信し、トークンが返ることを確認
 
 ![トークン取得](md-src/rested001.png "トークン取得")
 
-* GETで `Authorization: Bearer <取得したトークン>` ヘッダとともに [/api/item](http://localhost:5000/api/item) にアクセスし、Item一覧が返ることを確認
+- GET で `Authorization: Bearer <取得したトークン>` ヘッダとともに [/api/item](http://localhost:5000/api/item) にアクセスし、Item 一覧が返ることを確認
 
 ![データ取得](md-src/rested002.png "データ取得")
 
-## フロントエンドをJWT認証に対応させる
+## フロントエンドを JWT 認証に対応させる
 
-* wwwroot/*
+- wwwroot/\*
